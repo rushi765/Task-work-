@@ -1,241 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Task work - Earn Rewards</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Task Work - Earn Rewards</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
-
-    body {
-      background: #0b1020;
-      color: white;
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px;
-      background: #121a30;
-    }
-
-    .logo {
-      font-size: 25px;
-      font-weight: bold;
-      color: #55e6a5;
-    }
-
-    .hero {
-      text-align: center;
-      padding: 65px 20px;
-    }
-
-    .hero h1 {
-      font-size: 38px;
-      margin-bottom: 15px;
-    }
-
-    .hero span {
-      color: #55e6a5;
-    }
-
-    .hero p {
-      color: #c0c7d8;
-      margin-bottom: 25px;
-      line-height: 1.7;
-    }
-
-    button {
-      padding: 12px 22px;
-      border: none;
-      border-radius: 8px;
-      background: #55e6a5;
-      color: #08111c;
-      font-weight: bold;
-      cursor: pointer;
-      margin: 5px;
-    }
-
-    .tasks {
-      padding: 25px 20px 50px;
-      max-width: 900px;
-      margin: auto;
-    }
-
-    .tasks h2 {
-      text-align: center;
-      margin-bottom: 25px;
-    }
-
-    .task-card {
-      background: #151e34;
-      border: 1px solid #283653;
-      border-radius: 14px;
-      padding: 22px;
-      margin-bottom: 16px;
-    }
-
-    .task-card h3 {
-      margin-bottom: 12px;
-      color: #55e6a5;
-    }
-
-    .task-card p {
-      color: #c0c7d8;
-      line-height: 1.7;
-    }
-
-    .reward {
-      display: inline-block;
-      margin-top: 12px;
-      font-weight: bold;
-      color: #ffd166;
-    }
-
-    footer {
-      text-align: center;
-      padding: 25px;
-      color: #9ba8c0;
-      background: #121a30;
-    }
-
-    .auth {
-      display: none;
-      max-width: 400px;
-      margin: 20px auto 50px;
-      padding: 25px;
-      background: #151e34;
-      border-radius: 14px;
-    }
-
-    .auth h2 {
-      margin-bottom: 20px;
-    }
-
-    .auth input {
-      display: block;
-      width: 100%;
-      padding: 12px;
-      margin: 12px 0;
-      border-radius: 8px;
-      border: 1px solid #394762;
-      background: #0b1020;
-      color: white;
-    }
-
-    .auth p {
-      color: #c0c7d8;
-      margin-top: 12px;
-    }
-  </style>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+body{background:#0b1020;color:white}
+header{display:flex;justify-content:space-between;align-items:center;padding:20px;background:#121a30}
+.logo{font-size:24px;font-weight:bold;color:#55e6a5}
+button{padding:12px 20px;border:0;border-radius:8px;background:#55e6a5;color:#08111c;font-weight:bold;cursor:pointer;margin:5px}
+.hero{text-align:center;padding:60px 20px}
+.hero h1{font-size:38px;margin-bottom:15px}
+.hero span{color:#55e6a5}
+.hero p{color:#c0c7d8;line-height:1.7;margin:20px 0}
+.tasks{max-width:800px;margin:auto;padding:20px}
+.tasks h2{text-align:center;margin-bottom:25px}
+.task-card,.auth{background:#151e34;border:1px solid #283653;border-radius:14px;padding:22px;margin-bottom:18px}
+.task-card h3{color:#55e6a5;margin-bottom:12px}
+.task-card p{color:#c0c7d8;line-height:1.7}
+.reward{display:block;color:#ffd166;margin-top:12px}
+.auth{display:none;max-width:420px;margin:30px auto;padding:25px}
+.auth h2{margin-bottom:20px}
+input{display:block;width:100%;padding:13px;margin:12px 0;background:#0b1020;color:white;border:1px solid #394762;border-radius:8px}
+#message{color:#c0c7d8;line-height:1.6;margin-top:12px;overflow-wrap:anywhere}
+footer{text-align:center;padding:25px;color:#9ba8c0;background:#121a30;margin-top:30px}
+</style>
 </head>
 
 <body>
 
-  <header>
-    <div class="logo">TaskKarma</div>
-    <button onclick="showAuth('login')">Login / Signup</button>
-  </header>
+<header>
+<div class="logo">Task Work</div>
+<button onclick="showAuth('login')">Login / Signup</button>
+</header>
 
-  <section class="hero">
-    <h1>Complete Tasks.<br><span>Earn Rewards.</span></h1>
+<section class="hero">
+<h1>Complete Tasks.<br><span>Earn Rewards.</span></h1>
+<p>Welcome to Task Work! Discover tasks, complete eligible activities and earn rewards after verification.</p>
+<button onclick="showAuth('signup')">Get Started</button>
+<button onclick="document.getElementById('tasks').scrollIntoView({behavior:'smooth'})">Explore Tasks</button>
+</section>
 
-    <p>
-      Welcome to Task work !<br>
-      Discover tasks, complete eligible activities
-      and earn rewards after verification.
-    </p>
+<section class="tasks" id="tasks">
+<h2>Available Tasks</h2>
 
-    <button onclick="showAuth('signup')">Get Started</button>
-    <button onclick="document.getElementById('tasks').scrollIntoView({behavior:'smooth'})">
-      Explore Tasks
-    </button>
-  </section>
+<div class="task-card">
+<h3>Task 01 — App Offers</h3>
+<p>Explore eligible app offers and follow their official terms. Rewards depend on successful verification.</p>
+<span class="reward">Reward: Up to ₹25 per eligible offer</span>
+</div>
 
-  <section class="tasks" id="tasks">
-    <h2>Available Tasks</h2>
+<div class="task-card">
+<h3>Task 02 — TeraBox</h3>
+<p>Check the available referral activity and its eligibility requirements.</p>
+<span class="reward">Reward: Details to be confirmed</span>
+</div>
 
-    <div class="task-card">
-      <h3>Task 01 — App Offers</h3>
-      <p>
-        Explore eligible app offers and follow their official
-        terms. Rewards depend on successful verification.
-      </p>
-      <div class="reward">Reward: Up to ₹25-50 per eligible offer</div>
-    </div>
+<div class="task-card">
+<h3>Task 03 — YouTube</h3>
+<p>New activities and task details will be announced here.</p>
+<span class="reward">COMING SOON</span>
+</div>
+</section>
 
-    <div class="task-card">
-      <h3>Task 02 — TeraBox</h3>
-      <p>
-        Check the available TeraBox referral activity and
-        follow its eligibility requirements.
-      </p>
-      <div class="reward">Reward: Details to be confirmed</div>
-    </div>
+<section class="auth" id="auth">
+<h2 id="authTitle">Login</h2>
 
-    <div class="task-card">
-      <h3>Task 03 — YouTube</h3>
-      <p>
-        New activities and task details will be announced here.
-      </p>
-      <div class="reward">COMING SOON</div>
-    </div>
-  </section>
+<form id="authForm">
+<input type="email" id="email" placeholder="Email address" autocomplete="email" required>
+<input type="password" id="password" placeholder="Password (minimum 8 characters)" minlength="8" autocomplete="current-password" required>
+<button type="submit" id="authButton">Login</button>
+</form>
 
-  <section class="auth" id="auth">
-    <h2 id="authTitle">Create Account</h2>
+<button onclick="showAuth('signup')">Create Account</button>
+<button onclick="showAuth('login')">Back to Login</button>
 
-    <form onsubmit="handleAuth(event)">
-      <input type="email" id="email" placeholder="Email address" required>
-      <input type="password" id="password" placeholder="Password" minlength="8" required>
-      <button type="submit" id="authButton">Continue</button>
-    </form>
+<p id="message">Connect your account to continue.</p>
+</section>
 
-    <p id="authMessage">
-      Account authentication will be enabled in a later step.
-    </p>
-  </section>
+<footer>© 2026 Task Work | Earn Rewards Responsibly</footer>
 
-  <footer>
-    <p>© 2026 Task work | Earn Rewards Responsibly</p>
-  </footer>
+<script type="module">
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
-  <script>
-    let authMode = "login";
+const SUPABASE_URL = 'https://husnpreyersyhluolmvz.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_SmveEbnne_wWYtzabTFxCQ_Xl_ZxB7p';
+  
+const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 
-    function showAuth(mode) {
-      authMode = mode;
+let mode = 'login';
 
-      document.getElementById("authTitle").textContent =
-        mode === "signup" ? "Create Account" : "Login";
+window.showAuth = function(newMode) {
+  mode = newMode;
+  document.getElementById('authTitle').textContent =
+    mode === 'signup' ? 'Create Account' : 'Login';
 
-      document.getElementById("authButton").textContent =
-        mode === "signup" ? "Sign Up" : "Login";
+  document.getElementById('authButton').textContent =
+    mode === 'signup' ? 'Sign Up' : 'Login';
 
-      document.getElementById("authMessage").textContent =
-        "Authentication will be connected in a later step.";
+  document.getElementById('password').autocomplete =
+    mode === 'signup' ? 'new-password' : 'current-password';
 
-      document.getElementById("auth").style.display = "block";
+  document.getElementById('message').textContent = '';
+  document.getElementById('auth').style.display = 'block';
+  document.getElementById('auth').scrollIntoView({behavior:'smooth'});
+};
 
-      document.getElementById("auth").scrollIntoView({
-        behavior: "smooth"
-      });
+document.getElementById('authForm').addEventListener('submit', async function(event) {
+  event.preventDefault();
+
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+  const message = document.getElementById('message');
+  const button = document.getElementById('authButton');
+
+  if (SUPABASE_URL.includes('PASTE_') ||
+      SUPABASE_PUBLISHABLE_KEY.includes('PASTE_')) {
+    message.textContent = 'Please configure your Supabase URL and publishable key.';
+    return;
+  }
+
+  button.disabled = true;
+  message.textContent = 'Please wait...';
+
+  try {
+    let result;
+
+    if (mode === 'signup') {
+      result = await supabase.auth.signUp({email, password});
+    } else {
+      result = await supabase.auth.signInWithPassword({email, password});
     }
 
-    function handleAuth(event) {
-      event.preventDefault();
+    if (result.error) throw result.error;
 
-      document.getElementById("authMessage").textContent =
-        "Login system is not connected yet. Please wait for the next setup step.";
-    }
-  </script>
+    message.textContent = mode === 'signup'
+      ? 'Account request submitted. Check your email if verification is required.'
+      : 'Login successful!';
+
+  } catch (error) {
+    message.textContent = error.message || 'Something went wrong. Please try again.';
+  } finally {
+    button.disabled = false;
+  }
+});
+</script>
 
 </body>
 </html>
