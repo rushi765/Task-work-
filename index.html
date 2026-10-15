@@ -136,10 +136,24 @@ document.getElementById('authForm').addEventListener('submit', async function(ev
 
     if (result.error) throw result.error;
 
-    message.textContent = mode === 'signup'
-      ? 'Account request submitted. Check your email if verification is required.'
-      : 'Login successful!';
+  if (mode === 'signup') {
+  message.textContent =
+    'Account request submitted. Check your email if verification is required.';
+} else {
+  const { data: sessionData, error: sessionError } =
+    await supabase.auth.getSession();
 
+  if (sessionError) throw sessionError;
+
+  if (sessionData.session) {
+    message.textContent = 'Login successful!';
+
+    window.location.href = 'dashboard.html';
+  } else {
+    message.textContent =
+      'Login successful, but email verification may be required.';
+  }
+  }
   } catch (error) {
     message.textContent = error.message || 'Something went wrong. Please try again.';
   } finally {
