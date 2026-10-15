@@ -1,1 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Task Work | Dashboard</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #0b1020;
+  color: #fff;
+  padding-bottom: 30px;
+}
+
+header {
+  background: #121a30;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #283653;
+}
+
+.logo {
+  font-size: 23px;
+  font-weight: bold;
+  color: #55e6a5;
+}
+
+button {
+  padding: 11px 15px;
+  border: none;
+  border-radius: 8px;
+  background: #55e6a5;
+  color: #08111c;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.container {
+  max-width: 900px;
+  margin: 25px auto;
+  padding: 15px;
+}
+
+.welcome {
+  margin-bottom: 22px;
+}
+
+.welcome h1 {
+  font-size: 26px;
+  margin-bottom: 8px;
+}
+
+.welcome p {
+  color: #aab5ce;
+  overflow-wrap: anywhere;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 25px;
+}
+
+.card, .section {
+  background: #121a30;
+  border: 1px solid #283653;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.card p {
+  color: #aab5ce;
+  margin-bottom: 10px;
+}
+
+.balance {
+  color: #55e6a5;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 19px;
+  margin-bottom: 15px;
+}
+
+.task {
+  padding: 15px 0;
+  border-bottom: 1px solid #283653;
+}
+
+.task:last-child {
+  border-bottom: none;
+}
+
+.task h3 {
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.task p {
+  color: #aab5ce;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.reward {
+  color: #55e6a5;
+  display: block;
+  margin-bottom: 12px;
+}
+
+input {
+  width: 100%;
+  padding: 13px;
+  margin: 8px 0 14px;
+  background: #0b1020;
+  color: white;
+  border: 1px solid #394762;
+  border-radius: 8px;
+}
+
+.note {
+  color: #aab5ce;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+#status {
+  margin: 12px 0;
+  overflow-wrap: anywhere;
+  color: #55e6a5;
+}
+
+@media (max-width: 480px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  header {
+    padding: 15px;
+  }
+
+  .welcome h1 {
+    font-size: 23px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Task Work</div>
+  <button id="logoutBtn">Logout</button>
+</header>
+
+<main class="container">
+
+  <section class="welcome">
+    <h1>Welcome to Task Work 👋</h1>
+    <p id="userEmail">Checking your account...</p>
+  </section>
+
+  <section class="cards">
+    <div class="card">
+      <p>Available Balance</p>
+      <div class="balance" id="balance">₹0.00</div>
+    </div>
+
+    <div class="card">
+      <p>Total Earnings</p>
+      <div class="balance" id="earnings">₹0.00</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>👤 My Profile</h2>
+    <p id="profileEmail">Loading profile...</p>
+    <p class="note" style="margin-top:10px">
+      Your account information is linked to your login.
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>📋 Available Tasks</h2>
+
+    <div class="task">
+      <h3>Task 01 — App Offers</h3>
+      <p>Check eligible app offers and follow the official terms.</p>
+      <span class="reward">Reward: Up to ₹25</span>
+      <button type="button" class="taskBtn"
+        data-task="App Offers">View Task</button>
+    </div>
+
+    <div class="task">
+      <h3>Task 02 — TeraBox</h3>
+      <p>Referral activity. Eligibility and reward details must be confirmed.</p>
+      <span class="reward">Reward: To be confirmed</span>
+      <button type="button" class="taskBtn"
+        data-task="TeraBox">View Task</button>
+    </div>
+
+    <div class="task">
+      <h3>Task 03 — YouTube</h3>
+      <p>New activities and task details will be announced here.</p>
+      <span class="reward">COMING SOON</span>
+      <button type="button" disabled>Coming Soon</button>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>📜 Task History</h2>
+    <p id="historyMessage">
+      No task history available yet.
+    </p>
+    <p class="note" style="margin-top:10px">
+      Completed tasks and verified rewards will appear here after
+      database integration.
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>💳 Withdrawal Request</h2>
+
+    <form id="withdrawForm">
+      <label for="amount">Withdrawal Amount (₹)</label>
+      <input id="amount" type="number"
+        min="1" step="1" placeholder="Enter amount" required>
+
+      <label for="upi">UPI ID</label>
+      <input id="upi" type="text"
+        placeholder="Enter your UPI ID" required>
+
+      <button type="submit">Request Withdrawal</button>
+    </form>
+
+    <p id="status" role="status"></p>
+
+    <p class="note">
+      Withdrawal requests are not processed yet. This form does not
+      transfer money or save payment details.
+    </p>
+  </section>
+
+</main>
+
+<script type="module">
+import { createClient } from
+  'https://esm.sh/@supabase/supabase-js@2';
+
+const SUPABASE_URL =
+  'https://husnpreyerjuholmvz.supabase.co';
+
+const SUPABASE_PUBLISHABLE_KEY =
+  'sb_publishable_SmveEbnne_wWYtzabTFxCQ_Xl_ZxB7p';
+
+const supabase = createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
+
+const status = document.getElementById('status');
+
+async function initDashboard() {
+  const { data, error } = await supabase.auth.getSession();
+
+  if (error || !data.session) {
+    window.location.replace('index.html');
+    return;
+  }
+
+  const user = data.session.user;
+
+  document.getElementById('userEmail').textContent =
+    user.email || 'Logged-in user';
+
+  document.getElementById('profileEmail').textContent =
+    'Email: ' + (user.email || 'Not available');
+}
+
+document.getElementById('logoutBtn').addEventListener(
+  'click', async () => {
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+      status.textContent = 'Logout failed. Please try again.';
+      return;
+    }
+
+    window.location.replace('index.html');
+  }
+);
+
+document.querySelectorAll('.taskBtn').forEach(button => {
+  button.addEventListener('click', () => {
+    alert(
+      button.dataset.task +
+      ': Task details and verification will be added next.'
+    );
+  });
+});
+
+document.getElementById('withdrawForm').addEventListener(
+  'submit', event => {
+    event.preventDefault();
+
+    status.textContent =
+      'Withdrawal is not enabled yet. No request or payment was made.';
+  }
+);
+
+initDashboard();
+</script>
+
+</body>
+</html>
 
